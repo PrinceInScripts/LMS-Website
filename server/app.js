@@ -1,6 +1,10 @@
-import cookieParser from 'cookie-parser'
-import express from 'express'
-import cors from 'cors'
+// import cookieParser from 'cookie-parser'
+// import express from 'express'
+// import cors from 'cors'
+const cookieParser=require('cookie-parser')
+const express=require('express')
+const cors=require('cors')
+const userRoutes=require('./routes/user.routes')
 
 const app=express()
 
@@ -18,6 +22,7 @@ app.use('/ping',(req,res)=>{
 })
 
 //3 route config
+app.use('/api/v1/user',userRoutes)
 
 app.all('*',(req,res)=>{
     res.status(404).send('OOPS !! page not found')

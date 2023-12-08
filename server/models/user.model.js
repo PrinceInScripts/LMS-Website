@@ -1,4 +1,6 @@
 const {Schema,model} =require('mongoose')
+const bcrypt=require('bcrypt')
+const jwt=require('jsonwebtoken')
 
 const userSchema=new Schema({
     fullName:{
@@ -42,6 +44,29 @@ const userSchema=new Schema({
     forgotPasswordToken:String,
     forgotPasswordExpiry:Date
 },{timestamps:true})
+
+
+userSchema.pre('save',async function(){
+    if(!this.isModified('password')){
+        return next();
+    }
+    this.password=await bcrypt.hash(this.password,10)
+})
+
+userSchema.methods={
+    comaprePassword:async function(plainTextPassword){
+        return await bcrypt.compare(plainTextPassword)
+    },
+    generateJWTToken:function(){
+        return jwt.sign(
+            {id:this._id,role:this.role,email:this.email,subcription:this.subcription},
+            process.env.JWT_SECRET,
+            {
+                expiresIn:process.env.JWT_EXPIRY
+            }
+        )
+    }
+}
 
 const User=model('Users',userSchema);
 
