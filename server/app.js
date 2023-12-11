@@ -1,8 +1,9 @@
-const cookieParser=require('cookie-parser')
-const express=require('express')
-const cors=require('cors')
-const userRoutes=require('./routes/user.routes')
-const errorMiddleware=require('./middlewares/error.middleware')
+import cookieParser from 'cookie-parser'
+import express from 'express'
+import cors from 'cors'
+import userRoutes from './routes/user.routes.js'
+import errorMiddleware from './middlewares/error.middleware.js'
+import morgan from 'morgan'
 
 const app=express()
 
@@ -14,6 +15,8 @@ app.use(cors({
 }))
 
 app.use(cookieParser())
+
+app.use(morgan('dev'))
 
 app.use('/ping',(req,res)=>{
     res.send('Pong')

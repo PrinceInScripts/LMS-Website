@@ -1,6 +1,6 @@
-const {Schema,model} =require('mongoose')
-const bcrypt=require('bcrypt')
-const jwt=require('jsonwebtoken')
+import {Schema,model} from 'mongoose'
+import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
 
 const userSchema=new Schema({
     fullName:{
@@ -70,4 +70,4 @@ userSchema.methods={
 
 const User=model('Users',userSchema);
 
-module.exports=User
+export default User

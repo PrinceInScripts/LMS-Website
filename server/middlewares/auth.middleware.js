@@ -1,4 +1,7 @@
-const { default: AppError } = require("../utlis/appError")
+import AppError from "../utlis/appError.js"
+
+
+
 
 const isLoggesIn=function(req,res){
     const {token}=req.cookies
@@ -18,6 +21,6 @@ const isLoggesIn=function(req,res){
     next()
 }
 
-module.exports={
+export{
     isLoggesIn
 }
