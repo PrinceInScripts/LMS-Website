@@ -1,5 +1,7 @@
 import User from "../models/user.model.js"
 import AppError  from "../utlis/appError.js"
+import cloudinary from 'cloudinary'
+import fs from 'fs/promises'
 
 const cookieOptions={
     secure:true,
@@ -7,14 +9,14 @@ const cookieOptions={
     httpOnly:true
 }
 
-const register=async (req,res)=>{
+const register=async (req,res,next)=>{
     const {fullName,email,password}=req.body
 
     if(!fullName || !email || !password){
         return next(new AppError('All fields are required',400))
     }
 
-    const userExits=User.findOne({email})
+    const userExits=await User.findOne({email})
 
     if(userExits){
         return next(new AppError('Email Already exists',400))
@@ -34,10 +36,38 @@ const register=async (req,res)=>{
         return next(new AppError('User registration faild,please try again',400))
     }
 
-    //TODO: upload user picture
+
+    console.log('File details > ',JSON.stringify(req.file));
+        if(req.file){
+             try {
+            const result=await cloudinary.v2.uploader.upload(req.file.path,{
+                folder:'lms',
+                width:250,
+                height:250,
+                gravity:'faces',
+                crop:'fill'
+            })
+    
+            if(result){
+                user.avatar.public_id=result.public_id
+                user.avatar.secure_url=result.secure_url
+    
+                //remove file from local server
+                fs.rm(`uploads/${req.file.filename}`)
+            }
+        }
+        catch (e) {
+            return next(new AppError(e.message,'file not uploades,please try again',500))
+    
+        }
+    } 
+   
     await user.save()
 
     //TODO: get JWT token in cookie
+
+    const token=await user.generateJWTToken()
+    res.cookie('token',token,cookieOptions)
 
     user.password=undefined
 
@@ -47,7 +77,7 @@ const register=async (req,res)=>{
         user
     })
 }
-const login=async (req,res)=>{
+const login=async (req,res,next)=>{
 
     const {email,password}=req.body;
 
@@ -59,9 +89,10 @@ const login=async (req,res)=>{
         email
     }).select('+password')
 
-    if(!user || !user.comparePassword(password)){  //TODO
+    if(!user || ! (await user.comparePassword(password))){  //TODO
         return next(new AppError('User does not exists',400))
     }
+   
 
     const token=await user.generateJWTToken()
     user.password=undefined

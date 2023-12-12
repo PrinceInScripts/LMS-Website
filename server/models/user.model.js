@@ -35,10 +35,10 @@ const userSchema=new Schema({
     },
     avatar:{
         public_id:{
-            type:String
+            type:String,
         },
         secure_url:{
-            tpe:String
+            type:String,
         }
     },
     forgotPasswordToken:String,
@@ -46,7 +46,7 @@ const userSchema=new Schema({
 },{timestamps:true})
 
 
-userSchema.pre('save',async function(){
+userSchema.pre('save',async function(next){
     if(!this.isModified('password')){
         return next();
     }
@@ -54,11 +54,12 @@ userSchema.pre('save',async function(){
 })
 
 userSchema.methods={
-    comaprePassword:async function(plainTextPassword){
-        return await bcrypt.compare(plainTextPassword)
+    comparePassword:async function(plainTextPassword){
+        return await bcrypt.compare(plainTextPassword,this.password)
     },
-    generateJWTToken:function(){
-        return jwt.sign(
+    generateJWTToken:async function(){
+        console.log('JWT_SECRET:', process.env.JWT_SECRET);
+        return await jwt.sign(
             {id:this._id,role:this.role,email:this.email,subcription:this.subcription},
             process.env.JWT_SECRET,
             {
@@ -66,6 +67,7 @@ userSchema.methods={
             }
         )
     }
+   
 }
 
 const User=model('Users',userSchema);
