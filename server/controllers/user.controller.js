@@ -136,8 +136,8 @@ const logout=(req,res)=>{
 
 //++++++++++++++++++++getProfile Method+++++++++++++++++++++++
 
-const getProfile=(req,res)=>{
-    const user=User.findById(req.user.id);
+const getProfile=async (req,res)=>{
+    const user=await User.findById(req.user.id);
 
     res.status(200).json({
         success:true,
@@ -226,7 +226,93 @@ const resetPassword=async (req,res,next)=>{
            })
 }
 
+//++++++++++++++++++++changePassword Method+++++++++++++++++++++++
 
+const changePassword=async function(req,res,next){
+         const {oldPassword,newPassword}=req.body;
+         const {id}=req.user
+
+         if(!oldPassword || !newPassword){
+            return next(
+                new AppError('All fields are mandatory',400)
+            )
+         }
+
+         const user=await User.findOne(id).select('+password')
+
+         if(!user){
+            return next(
+                new AppError('User does not exist',400)
+            )
+         }
+
+         const isPassword=await user.comparePassword(password);
+
+         if(!isPassword){
+            return next(
+                new AppError('Invalid old password',400)
+            )
+         }
+
+         user.password=newPassword
+
+         await user.save()
+
+         user.password=undefined
+
+         res.status(200).json({
+            success:true,
+            message:'Password changed successfully'
+         })
+}
+
+//++++++++++++++++++++updateUser Method+++++++++++++++++++++++
+
+
+const updateUser=async function(req,res,next){
+    const {fullName}=req.body;
+    const {id}=req.user
+    
+    const user=await User.findById(id)
+
+    if(!user){
+        return next(
+            new AppError('User does not exist',400)
+        )
+    }
+
+    if(fullName){
+        user.fullName=fullName
+    }
+
+    if(req.file){
+        await cloudinary.v2.uploader.destroy(user.avatar.public_id)
+        
+        const result=await cloudinary.v2.uploader.upload(req.file.path,{
+            folder:'lms',
+            width:250,
+            height:250,
+            gravity:'faces',
+            crop:'fill'
+        })
+
+        if(result){
+            user.avatar.public_id=result.public_id
+            user.avatar.secure_url=result.secure_url
+
+            //remove file from local server
+            fs.rm(`uploads/${req.file.filename}`)
+        }
+
+    }
+
+    await user.save()
+
+    res.status(200).json({
+        success:true,
+        message:'User details updated successfylly'
+    })
+}
 
 export{
     register,
@@ -234,5 +320,7 @@ export{
     logout,
     getProfile,
     forgotPassword,
-    resetPassword
+    resetPassword,
+    changePassword,
+    updateUser
 }
