@@ -1,19 +1,26 @@
 import AppError from "../utlis/appError.js"
+import jwt from 'jsonwebtoken'
 
 
 
 
-const isLoggesIn=function(req,res){
-    const {token}=req.cookies
+const isLoggedIn=async function(req,res,next){
+
+    console.log(req.headers);
+    
+    const { token } = req.cookies;   
+
+    console.log(token)
 
     if(!token){
         return next(new AppError('Unauthenticated, please login',401))
     }
 
-    const tokenDetails=jwt.verify(token,process.env.JWT_SECRET);
+    const tokenDetails = jwt.verify(token, process.env.JWT_SECRET);
+    console.log(tokenDetails);
 
     if(!tokenDetails){
-        return next(new AppError('Unauthenticated, please login',401))
+        return next(new AppError('Token is not verifyied, please login',401))
     }
 
     req.user=tokenDetails
@@ -22,5 +29,6 @@ const isLoggesIn=function(req,res){
 }
 
 export{
-    isLoggesIn
+    isLoggedIn
 }
+

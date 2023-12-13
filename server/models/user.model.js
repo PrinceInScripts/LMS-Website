@@ -58,7 +58,6 @@ userSchema.methods={
         return await bcrypt.compare(plainTextPassword,this.password)
     },
     generateJWTToken:async function(){
-        console.log('JWT_SECRET:', process.env.JWT_SECRET);
         return await jwt.sign(
             {id:this._id,role:this.role,email:this.email,subcription:this.subcription},
             process.env.JWT_SECRET,

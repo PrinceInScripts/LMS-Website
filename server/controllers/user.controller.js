@@ -9,6 +9,9 @@ const cookieOptions={
     httpOnly:true
 }
 
+
+//++++++++++++++++++++Registration Method+++++++++++++++++++++++
+
 const register=async (req,res,next)=>{
     const {fullName,email,password}=req.body
 
@@ -37,7 +40,6 @@ const register=async (req,res,next)=>{
     }
 
 
-    console.log('File details > ',JSON.stringify(req.file));
         if(req.file){
              try {
             const result=await cloudinary.v2.uploader.upload(req.file.path,{
@@ -64,8 +66,6 @@ const register=async (req,res,next)=>{
    
     await user.save()
 
-    //TODO: get JWT token in cookie
-
     const token=await user.generateJWTToken()
     res.cookie('token',token,cookieOptions)
 
@@ -77,6 +77,11 @@ const register=async (req,res,next)=>{
         user
     })
 }
+
+
+//++++++++++++++++++++Login Method+++++++++++++++++++++++
+
+
 const login=async (req,res,next)=>{
 
     const {email,password}=req.body;
@@ -107,6 +112,11 @@ const login=async (req,res,next)=>{
 
 
 }
+
+
+//++++++++++++++++++++Logout Method+++++++++++++++++++++++
+
+
 const logout=(req,res)=>{
    res.cookie('token',null,{
     secure:true,
@@ -121,6 +131,9 @@ const logout=(req,res)=>{
 })
 
 }
+
+//++++++++++++++++++++getProfile Method+++++++++++++++++++++++
+
 const getProfile=(req,res)=>{
     const user=User.findById(req.user.id);
 
