@@ -17,13 +17,15 @@ const isLoggedIn=async function(req,res,next){
     }
 
     const tokenDetails = jwt.verify(token, process.env.JWT_SECRET);
-    console.log(tokenDetails);
-
+   
     if(!tokenDetails){
         return next(new AppError('Token is not verifyied, please login',401))
     }
 
     req.user=tokenDetails
+
+    console.log(req.user);
+
 
     next()
 }
