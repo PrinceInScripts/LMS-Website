@@ -2,6 +2,7 @@ import cookieParser from 'cookie-parser'
 import express from 'express'
 import cors from 'cors'
 import userRoutes from './routes/user.routes.js'
+import courseRoutes from './routes/course.routes.js'
 import errorMiddleware from './middlewares/error.middleware.js'
 import morgan from 'morgan'
 
@@ -24,6 +25,7 @@ app.use('/ping',(req,res)=>{
 
 //3 route config
 app.use('/api/v1/user',userRoutes)
+app.use('/api/v1/courses',courseRoutes)
 
 app.all('*',(req,res)=>{
     res.status(404).send('OOPS !! page not found')
