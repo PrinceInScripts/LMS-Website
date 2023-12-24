@@ -1,6 +1,9 @@
 import cookieParser from 'cookie-parser'
 import express from 'express'
 import cors from 'cors'
+import { config } from 'dotenv';
+config()
+
 import userRoutes from './routes/user.routes.js'
 import courseRoutes from './routes/course.routes.js'
 import paymentRoutes from './routes/payment.routes.js'
@@ -13,7 +16,7 @@ app.use(express.json())
 
 app.use(cors({
     origin:[process.env.FRONTEND_URL],
-    Credential:true
+    credentials:true
 }))
 
 app.use(cookieParser())
