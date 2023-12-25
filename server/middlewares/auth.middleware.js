@@ -2,33 +2,27 @@ import AppError from "../utlis/appError.js"
 import jwt from 'jsonwebtoken'
 
 
+const isLoggedIn = async function(req, res, next) {
+    try {
+        const { token } = req.cookies;
 
+        if (!token) {
+            return next(new AppError('Unauthenticated, please login', 401));
+        }
 
-const isLoggedIn=async function(req,res,next){
+        const tokenDetails = await jwt.verify(token, process.env.JWT_SECRET);
 
-    console.log(req.headers);
-    
-    const { token } = req.cookies;   
+        if (!tokenDetails) {
+            return next(new AppError('Token is not verified, please login', 401));
+        }
 
-    console.log(token)
+        req.user = tokenDetails;
 
-    if(!token){
-        return next(new AppError('Unauthenticated, please login',401))
+        next();
+    } catch (error) {
+        return next(new AppError('Internal Server Error', 500));
     }
-
-    const tokenDetails = jwt.verify(token, process.env.JWT_SECRET);
-   
-    if(!tokenDetails){
-        return next(new AppError('Token is not verifyied, please login',401))
-    }
-
-    req.user=tokenDetails
-
-    console.log(req.user);
-
-
-    next()
-}
+};
 
 const authorizedRoles = (...roles)=> (req,res,next)=>{
 
