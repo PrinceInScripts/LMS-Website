@@ -33,7 +33,7 @@ const register=async (req,res,next)=>{
         password,
         avatar:{
             public_id:email,
-            secure_url:'https://images.pexels.com/photos/19321435/pexels-photo-19321435/free-photo-of-a-christmas-tree-with-a-candle-and-a-book.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load'
+            secure_url:'https://res.cloudinary.com/du9jzqlpt/image/upload/v1674647316/avatar_drzgxv.jpg'
         }
     })
 

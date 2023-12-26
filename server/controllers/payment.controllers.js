@@ -19,6 +19,7 @@ export const getRazorpayApiKey=async (req,res,next)=>{
      }
 }
 export const buySubscription=async (req,res,next)=>{
+
     try {
         const {id}=req.user
 
@@ -37,8 +38,9 @@ export const buySubscription=async (req,res,next)=>{
         }
 
         const subscription=await razorpay.subscriptions.create({
-            plan_id:process.env.RAZORPAY_SECRET,
-            customer_notify:1
+            plan_id:process.env.RAZORPAY_PLAN_ID,
+            customer_notify:1,
+            total_count: 12,
         })
 
         //update user model with subscription
@@ -50,7 +52,9 @@ export const buySubscription=async (req,res,next)=>{
 
         res.status(200).json({
             success:true,
-            message:'Subscribed Successfully'
+            message:'Subscribed Successfully',
+            subscription_id: subscription.id,
+
         })
 
     } catch (e) {
