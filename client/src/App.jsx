@@ -14,6 +14,7 @@ import Profile from './pages/User/Profile/Profile'
 import EditProfile from './pages/User/EditProfile/EditProfile'
 import Checkout from './pages/Payment/Checkout/Checkout'
 import CheckoutSuccess from './pages/Payment/CheckoutSuccess/CheckoutSuccess'
+import CheckoutFail from './pages/Payment/CheckoutFail/CheckoutFail'
 
 
 
@@ -34,6 +35,7 @@ function App() {
 
           <Route path='/checkout' element={<Checkout/>}/>
           <Route path='/checkout/success' element={<CheckoutSuccess/>}/>
+          <Route path='/checkout/fail' element={<CheckoutFail/>}/>
        </Route>
 
        <Route element={<RequireAuth allowedRoles={["ADMIN"]}/>}>
