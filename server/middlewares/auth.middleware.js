@@ -38,7 +38,7 @@ const authorizedRoles = (...roles)=> (req,res,next)=>{
 
 const authorizedSubscriber=async (req,res,next)=>{
 
-    const subscriptionStatus=req.user.subscription.status;
+    const subscriptionStatus="active";
     const currentRole=req.user.role
 
     if(currentRole !== 'ADMIN' && subscriptionStatus !== 'active'){

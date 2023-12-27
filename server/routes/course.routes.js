@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import { addLectureToCourseById, createCourse, deleteCourse, getAllCourses, getLectureByCourseId, updateCourse } from '../controllers/course.contoller.js'
+import { addLectureToCourseById, createCourse, deleteCourse, getAllCourses, getLectureByCourseId, removeLectureFromCourse, updateCourse } from '../controllers/course.contoller.js'
 import { authorizedRoles, authorizedSubscriber, isLoggedIn } from '../middlewares/auth.middleware.js'
 import upload from '../middlewares/multer.middleware.js'
 
@@ -14,6 +14,10 @@ router
           upload.single('thumbail'),
           createCourse
       )
+      .delete(
+            isLoggedIn,
+            authorizedRoles('ADMIN'), 
+            removeLectureFromCourse);
 
 router
       .route('/:courseId')
