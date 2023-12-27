@@ -54,6 +54,12 @@ function CourseDescription() {
                       <p>
                         {state?.description}
                       </p>
+                      {role === 'ADMIN'?(
+                               <button
+                               onClick={()=>navigate("/course/addlecture",{state:{...state}})}
+                               className="btn btn-outline btn-primary text-xl rounded-md font-bold px-5 py-3 "
+                               >Add Lecture</button>
+                           ) :("")}
                   </div>
                </div>
             </div>
