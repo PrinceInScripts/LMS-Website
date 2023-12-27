@@ -24,12 +24,7 @@ function DisplayLectures() {
 
   useEffect(() => {
     if (!state) navigate("/courses");
-    console.log(lectures);
-    console.log(state._id);
-
     dispatch(getCourseLecture(state._id));
-    console.log(dispatch(getCourseLecture(state._id)));
-    console.log(lectures);
 
   }, []);
   return (
@@ -70,7 +65,7 @@ function DisplayLectures() {
                 <p>Lectures List</p>
                 {role === "ADMIN" && (
                   <button
-                    onClick={() =>navigate("/course/addlecture",)}
+                    onClick={() =>navigate("/course/addlecture",{state:{...state}})}
                     className="btn btn-accent px-2 py-1 rounded-md font-semibold text-sm"
                   >
                     Add New Lecture
