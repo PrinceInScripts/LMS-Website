@@ -121,6 +121,27 @@ export const forgetPassword=createAsyncThunk("/auth/forgotPassword",async (email
     }
 })
 
+export const resetPassword=createAsyncThunk("/user/reset",async (data)=>{
+    try {
+        const response=axiosInstance.post(`/user/reset/${data.resetToken}`,{
+            password:data.password
+        })
+
+        toast.promise(response,{
+            loading:'Resetting....',
+            success:(data)=>{
+                return data?.data?.message;
+            },
+            error:'Faild to reset password'
+        })
+        return (await response).data;
+    } catch (error) {
+        toast.error(error?.response?.data?.message)
+    }
+})
+
+
+
 
 
 

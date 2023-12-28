@@ -28,6 +28,8 @@ function ForgotPassword() {
         const response=await dispatch(forgetPassword(email))
 
         setEmail("")
+
+        navigate("/")
     }
     return (
         <HomeLayout>

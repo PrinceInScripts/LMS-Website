@@ -21,6 +21,7 @@ import AdminDashboard from './pages/Dashboard/AdminDashboard/AdminDashboard'
 import NotRequireAuth from './components/Auth/NotRequireAuth'
 import ChangePassword from './pages/Password/ChangePassword/ChangePassword'
 import ForgotPassword from './pages/Password/ForgetPassword/ForgotPassword'
+import ResetPassword from './pages/Password/ResetPassword/ResetPassword'
 
 
 
@@ -33,6 +34,7 @@ function App() {
        <Route path='/courses' element={<CourseList/>}/>
        <Route path='/changepassword' element={<ChangePassword/>}/>
        <Route path='/forgotPassword' element={<ForgotPassword/>}/>
+       <Route path='/reset-password/:resetToken' element={<ResetPassword/>}/>
 
 
        <Route element={<NotRequireAuth/>}>
