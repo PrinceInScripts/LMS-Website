@@ -87,6 +87,26 @@ export const logout=createAsyncThunk("/auth/logout",async ()=>{
     }
 })
 
+export const changePassword=createAsyncThunk("/auth/chnagePassword",async (userPassword)=>{
+    try {
+        const response=axiosInstance.post("user/change-password",userPassword)
+
+        toast.promise(response,{
+            loading:'Loading....',
+            success:(data)=>{
+                return data?.data?.message;
+            },
+            error:'Faild to change password'
+        })
+        return (await response).data;
+    } catch (error) {
+        toast.error(error?.response?.data?.message)
+    }
+})
+
+
+
+
 
 
 

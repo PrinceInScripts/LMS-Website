@@ -19,6 +19,7 @@ import DisplayLectures from './pages/Dashboard/DisplayLectures/DisplayLectures'
 import AddLecture from './pages/Dashboard/AddLecture/AddLecture'
 import AdminDashboard from './pages/Dashboard/AdminDashboard/AdminDashboard'
 import NotRequireAuth from './components/Auth/NotRequireAuth'
+import ChangePassword from './pages/Password/ChangePassword/ChangePassword'
 
 
 
@@ -29,6 +30,8 @@ function App() {
        <Route path='/' element={<Home/>}/>
        <Route path='/about' element={<Aboutus/>}/>
        <Route path='/courses' element={<CourseList/>}/>
+       <Route path='/changepassword' element={<ChangePassword/>}/>
+
 
        <Route element={<NotRequireAuth/>}>
        <Route path='/signup' element={<Signup/>}/>
