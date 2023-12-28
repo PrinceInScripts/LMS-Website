@@ -238,7 +238,7 @@ const changePassword=async function(req,res,next){
             )
          }
 
-         const user=await User.findOne(id).select('+password')
+         const user=await User.findById(id).select('+password')
 
          if(!user){
             return next(
@@ -246,7 +246,7 @@ const changePassword=async function(req,res,next){
             )
          }
 
-         const isPassword=await user.comparePassword(password);
+         const isPassword=await user.comparePassword(oldPassword);
 
          if(!isPassword){
             return next(
