@@ -18,6 +18,7 @@ import CheckoutFail from './pages/Payment/CheckoutFail/CheckoutFail'
 import DisplayLectures from './pages/Dashboard/DisplayLectures/DisplayLectures'
 import AddLecture from './pages/Dashboard/AddLecture/AddLecture'
 import AdminDashboard from './pages/Dashboard/AdminDashboard/AdminDashboard'
+import NotRequireAuth from './components/Auth/NotRequireAuth'
 
 
 
@@ -27,26 +28,30 @@ function App() {
     <Routes>
        <Route path='/' element={<Home/>}/>
        <Route path='/about' element={<Aboutus/>}/>
+       <Route path='/courses' element={<CourseList/>}/>
+
+       <Route element={<NotRequireAuth/>}>
        <Route path='/signup' element={<Signup/>}/>
        <Route path='/signin' element={<Signin/>}/>
-       <Route path='/courses' element={<CourseList/>}/>
-       <Route path='/course/description' element={<CourseDescription/>}/>
+       </Route>
 
        <Route element={<RequireAuth allowedRoles={["ADMIN","USER"]}/>}>
-          <Route path='/user/profile' element={<Profile/>}/>
-          <Route path='/user/editprofile' element={<EditProfile/>}/>
-
+          <Route path='/course/description' element={<CourseDescription/>}/>
           <Route path='/checkout' element={<Checkout/>}/>
           <Route path='/checkout/success' element={<CheckoutSuccess/>}/>
           <Route path='/checkout/fail' element={<CheckoutFail/>}/>
+          <Route path='/user/profile' element={<Profile/>}/>
+          <Route path='/user/editprofile' element={<EditProfile/>}/>
+
+          
 
           <Route path='/course/displaylectures' element={<DisplayLectures/>}/>
-          <Route path='/course/addlecture' element={<AddLecture/>}/>\
 
-          <Route path='/admin/dashboard' element={<AdminDashboard/>}/>
        </Route>
 
        <Route element={<RequireAuth allowedRoles={["ADMIN"]}/>}>
+          <Route path='/admin/dashboard' element={<AdminDashboard/>}/>
+          <Route path='/course/addlecture' element={<AddLecture/>}/>
           <Route path='/course/create' element={<CreateCourse/>}/>
        </Route>
 
