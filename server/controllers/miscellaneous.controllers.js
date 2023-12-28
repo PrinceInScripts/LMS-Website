@@ -1,3 +1,4 @@
+import User from "../models/user.model.js"
 import AppError from "../utlis/appError.js"
 import sendEmail from "../utlis/sendEmail.js"
 
@@ -24,4 +25,19 @@ export const contactUs=async (req,res,next)=>{
         success: true,
         message: 'Your request has been submitted successfully',
       });
+}
+
+export const userStats=async (req,res,next)=>{
+   const allUsersCount=await User.countDocuments()
+
+   const subscribedUsersCount=await User.countDocuments({
+      'subscription.status': 'active',
+   })
+
+   res.status(200).json({
+      success: true,
+      message: 'All registered users count',
+      allUsersCount,
+      subscribedUsersCount,
+    });
 }

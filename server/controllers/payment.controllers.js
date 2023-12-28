@@ -154,7 +154,7 @@ export const getAllPayments=async (req,res,next)=>{
     try {
         
 
-        const {count}=req.query;
+        const {count,skip}=req.query;
 
         const subscriptions=await razorpay.subscriptions.all({
             count : count ? count : 10,
@@ -192,7 +192,7 @@ export const getAllPayments=async (req,res,next)=>{
             December: 0,
         }
 
-        const monthlyWisePayments=allPayments.items.map((payment)=>{
+        const monthlyWisePayments=subscriptions.items.map((payment)=>{
             const monthIsNumbers=new Date(payment.start_at*1000)
 
             return monthNames[monthIsNumbers.getMonth()]
@@ -215,7 +215,7 @@ export const getAllPayments=async (req,res,next)=>{
         res.status(200).json({
             success:true,
             message:'All payments',
-            allPayments,
+            subscriptions,
             finalMonths,
             monthlySalesRecord
         })
