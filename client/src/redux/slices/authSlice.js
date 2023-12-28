@@ -104,6 +104,23 @@ export const changePassword=createAsyncThunk("/auth/chnagePassword",async (userP
     }
 })
 
+export const forgetPassword=createAsyncThunk("/auth/forgotPassword",async (email)=>{
+    try {
+        const response=axiosInstance.post("user/reset",{email})
+
+        toast.promise(response,{
+            loading:'Loading....',
+            success:(data)=>{
+                return data?.data?.message;
+            },
+            error:'Faild to send verification email'
+        })
+        return (await response).data;
+    } catch (error) {
+        toast.error(error?.response?.data?.message)
+    }
+})
+
 
 
 

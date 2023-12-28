@@ -20,6 +20,7 @@ import AddLecture from './pages/Dashboard/AddLecture/AddLecture'
 import AdminDashboard from './pages/Dashboard/AdminDashboard/AdminDashboard'
 import NotRequireAuth from './components/Auth/NotRequireAuth'
 import ChangePassword from './pages/Password/ChangePassword/ChangePassword'
+import ForgotPassword from './pages/Password/ForgetPassword/ForgotPassword'
 
 
 
@@ -31,6 +32,7 @@ function App() {
        <Route path='/about' element={<Aboutus/>}/>
        <Route path='/courses' element={<CourseList/>}/>
        <Route path='/changepassword' element={<ChangePassword/>}/>
+       <Route path='/forgotPassword' element={<ForgotPassword/>}/>
 
 
        <Route element={<NotRequireAuth/>}>
