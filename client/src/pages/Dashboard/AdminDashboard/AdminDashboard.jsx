@@ -226,12 +226,9 @@ useEffect(() => {
         <td className="flex items-center gap-2 lg:gap-4">
           <button
             onClick={() =>
-              navigate('/course/create', {
+              navigate(`/course/${element._id}`, {
                 state: {
-                  initialCourseData: {
-                    newCourse: false,
-                    ...element,
-                  },
+                  ...element
                 },
               })
             }

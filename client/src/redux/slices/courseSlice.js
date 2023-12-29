@@ -79,6 +79,7 @@ export const deleteCourse = createAsyncThunk("/course/delete", async (id) => {
         createdBy: data.createdBy,
         description: data.description,
       });
+      console.log(res);
   
       toast.promise(res, {
         loading: "Updating the course...",

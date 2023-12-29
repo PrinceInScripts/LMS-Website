@@ -22,6 +22,7 @@ import NotRequireAuth from './components/Auth/NotRequireAuth'
 import ChangePassword from './pages/Password/ChangePassword/ChangePassword'
 import ForgotPassword from './pages/Password/ForgetPassword/ForgotPassword'
 import ResetPassword from './pages/Password/ResetPassword/ResetPassword'
+import UpdateCourse from './pages/Courses/UpdateCourse/UpdateCourse'
 
 
 
@@ -44,6 +45,7 @@ function App() {
 
        <Route element={<RequireAuth allowedRoles={["ADMIN","USER"]}/>}>
           <Route path='/course/description' element={<CourseDescription/>}/>
+          <Route path='/course/:courseId' element={<UpdateCourse/>}/>
           <Route path='/checkout' element={<Checkout/>}/>
           <Route path='/checkout/success' element={<CheckoutSuccess/>}/>
           <Route path='/checkout/fail' element={<CheckoutFail/>}/>
