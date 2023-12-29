@@ -69,7 +69,7 @@ function AddLecture() {
     return (
         <HomeLayout>
             <div className=" text-white flex flex-col items-center justify-center gap-10 mx-16 min-h-[90vh]">
-        <div className="flex flex-col gap-5 p-2 shadow-[0_0_10px_black] w-96 rounded-lg">
+        <div className="flex flex-col gap-5 lg:p-10 p-4 shadow-[0_0_10px_black] w-80 lg:w-96 rounded-lg">
           <header className="flex items-center justify-center relative">
             <button
               onClick={() => navigate(-1)}

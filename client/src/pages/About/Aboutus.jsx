@@ -10,13 +10,13 @@ import einstein from '../../assets/Images/einstein.png'
 function Aboutus() {
     return (
         <HomeLayout>
-        <div className="flex flex-col text-white pl-20 pt-20">
-          <div className="flex items-center gap-5 mx-10">
-            <section className="w-1/2 space-y-10">
-              <h1 className="text-5xl text-yellow-500 font-semibold">
+        <div className="flex flex-col text-white lg:pl-20 pt-32 lg:pt-20">
+          <div className="lg:flex flex flex-col lg:flex-row items-center gap-5 mx-10">
+            <section className="lg:w-1/2 space-y-8">
+              <h1 className="lg:text-5xl text-lg text-yellow-500 font-semibold">
                 Affordable and quality education
               </h1>
-              <p className="text-xl text-gray-200">
+              <p className="lg:text-xl text-xs text-gray-200">
                 Our goal is to provide the affortable and quality education to the
                 world. We are providing the plateform for the aspiring teachers
                 and students to share their skills, creativity and knowledge to
@@ -24,7 +24,7 @@ function Aboutus() {
                 mankind.
               </p>
             </section>
-            <div className="w-1/2">
+            <div className="lg:w-1/2">
               <img
                 src={aboutMainImage}
                 alt="about main page"
@@ -33,7 +33,7 @@ function Aboutus() {
             </div>
           </div>
   
-          <div className="carousel w-1/2 my-10 mx-auto">
+          <div className="carousel lg:w-1/2 my-10 lg:mx-auto">
             <div id="slide1" className="carousel-item relative w-full">
               <div className="flex flex-col items-center justify-center gap-4 px-[15%]">
                 <img src={apj} className="w-40 rounded-full border-2 border-gray-400" />

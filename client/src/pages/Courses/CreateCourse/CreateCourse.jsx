@@ -71,28 +71,32 @@ function CreateCourse() {
 
     return (
         <HomeLayout>
-            <div className="h-[100vh] flex items-center justify-center">
+            <div className="h-[90vh] flex items-center justify-center">
                 <form
                 onSubmit={onFormSubmit}
-                className="flex flex-col justify-center gap-5 rounded-lg p-4 text-white w-[700px] h-[450px] my-10 shadow-[0_0_10px_black] relative"
+                className="flex flex-col justify-center mt-20 lg:mt-0 gap-5 rounded-lg p-4 lg:p-10 text-white w-[350px] lg:w-[700px] lg:h-[450px] my-10 shadow-[0_0_10px_white] relative"
                 >
-                  <Link onClick={()=>navigate(-1)} className="absolute top-8 text-2xl link text-accent cursor-pointer">
+                    <div className="flex items-center justify-center gap-4 lg:block">
+                    <Link onClick={()=>navigate(-1)} className="lg:absolute lg:top-8 top-2 text-2xl link text-accent cursor-pointer">
                   <AiOutlineArrowLeft/>
                   </Link>
-                  <h1 className="text-center text-2xl font-bold">Create New Course</h1>
+                  <h1 className="text-center text-2xl font-bold mt-2">Create New Course</h1>
 
-                  <main className="grid grid-cols-2 gap-x-10">
-                     <div className="gap-y-6">
+                    </div>
+                  
+
+                  <main className="lg:grid lg:grid-cols-2 grid grid-cols-1 gap-x-10">
+                     <div className="gap-y-6 flex gap-2 items-center justify-center lg:block lg:gap-0">
                          <div>
-                            <label htmlFor="image_uploads" className="cursor-pointer">
+                            <label htmlFor="image_uploads" className="cursor-pointer text-center">
                                 {userInput?.previewImage ? (
                                     <img
                                     src={userInput?.previewImage}
-                                    className="w-full h-44 m-auto border"
+                                    className="lg:w-full lg:h-44 m-auto border"
                                     />
                                 ) : (
                                    <div className="w-full h-44 m-auto flex items-center justify-center border">
-                                       <h1 className="font-bold text-lg">Upload course thumnail</h1>
+                                       <h1 className="font-bold text-sm lg:text-lg">Upload course thumnail</h1>
                                    </div>
                                 )}
                             </label>

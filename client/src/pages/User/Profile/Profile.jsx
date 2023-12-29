@@ -23,10 +23,10 @@ function Profile() {
     return (
         <HomeLayout>
             <div className="min-h-[90vh] flex items-center justify-center">
-                <div className="my-10 flex flex-col gap-4 rounded-lg p-4 text-white w-96 shadow-[0_0_10px_black]">
+                <div className="my-10 flex flex-col gap-4 rounded-lg px-10 py-10 text-white w-96 h-[35rem] shadow-[0_0_10px_white]">
                    <img
                    src={userData?.avatar?.secure_url}
-                   className="w-40 m-auto rounded-full border border-black"
+                   className="w-42 m-auto rounded-full border border-black"
                    />
                    <h3 className="text-xl font-semibold text-center capitalize">
                      {userData?.fullName}

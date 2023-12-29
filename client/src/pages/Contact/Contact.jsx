@@ -56,7 +56,7 @@ function Contact() {
     }
     return (
        <HomeLayout>
-          <div className="flex items-center justify-center h-[100vh]">
+          <div className="flex items-center justify-center h-[90vh]">
         <form onSubmit={onFormSubmit} noValidate className="flex flex-col items-center justify-center gap-2 p-5 w-[22rem] rounded-md text-white">
               <h1 className="text-3xl font-semibold">Contact Form</h1>
                 <div className="flex flex-col gap-1 w-full">
