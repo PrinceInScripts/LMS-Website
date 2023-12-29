@@ -85,6 +85,15 @@ function Signin() {
                     id="password"
                     />
                 </div>
+                <div className="link  relative left-40">
+                <Link to={"/forgotPassword"}>
+                <p className="text-white">
+                    Forgot Password?
+                    </p>
+                </Link>
+                </div>
+                
+                
                 <button type="submit" className="mt-2 bg-yellow-800 hover:bg-yellow-500 transition-all ease-in-out duration-300 cursor-pointer py-2 font-semibold text-lg rounded-md">
                    Sign In
                 </button>

@@ -23,7 +23,7 @@ function CourseList() {
                   Explore courses made by {" "}
                   <span className="font-bold text-yellow-500">Industry experts</span>
                </h1>
-               <div className="grid grid-cols-1 lg:grid-cols-3 gap-y-20">
+               <div className="grid grid-cols-1 ml-5 md:ml-10 md:grid-cols-2 lg:grid-cols-3 gap-y-20">
                {courseList?.map((element)=>{
                 return <CourseCard key={element._id} data={element}/>
                })}
