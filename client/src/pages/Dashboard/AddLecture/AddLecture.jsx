@@ -41,7 +41,7 @@ function AddLecture() {
 
    async function handleFormSubmit(e){
        e.preventDefault()
-
+       
        if(!userInput.lecture || !userInput.title || !userInput.description){
         toast.error("All fields are required")
         return

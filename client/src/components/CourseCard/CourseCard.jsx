@@ -1,5 +1,3 @@
-
-
 import { BsPersonCircle } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
@@ -7,7 +5,7 @@ function CourseCard({ data }) {
   const navigate = useNavigate();
 
   return (
-    <div className="group w-[22rem] h-[430px] shadow-lg rounded-lg cursor-pointer overflow-hidden bg-zinc-700 transition-transform transform hover:scale-105 relative">
+    <div className="group w-[22rem] h-[500px] shadow-lg rounded-lg cursor-pointer overflow-hidden bg-zinc-700 transition-transform transform hover:scale-105 relative">
       <div className="relative overflow-hidden">
         <div
           className="w-full h-48 relative"

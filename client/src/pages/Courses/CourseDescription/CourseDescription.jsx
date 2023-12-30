@@ -1,84 +1,3 @@
-// import { useEffect } from "react";
-// import { useSelector } from "react-redux";
-// import { useLocation, useNavigate } from "react-router-dom";
-// import HomeLayout from "../../../Layouts/HomeLayout/HomeLayout";
-
-// function CourseDescription() {
-//   const { state } = useLocation();
-//   const navigate = useNavigate();
-
-//   const { role, data } = useSelector((state) => state.auth);
-
-//   return (
-//     <HomeLayout>
-//       <div className="min-h-[90vh] pt-12 px-4 sm:px-8 md:px-16 lg:px-20 xl:px-24 flex flex-col items-center justify-center text-white">
-//         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-10 relative">
-//           {/* Image Section */}
-//           <div className="space-y-5">
-//             <img
-//               className="w-full h-auto max-h-64 md:max-h-full rounded-md object-cover"
-//               alt="thumbnail"
-//               src={state?.thumbail?.secure_url}
-//             />
-//           </div>
-
-//           {/* Information Section */}
-//           <div className="space-y-4">
-//             <h1 className="text-3xl lg:text-4xl font-bold text-yellow-500 mb-5 text-center">
-//               {state?.title}
-//             </h1>
-
-//             <div className="flex flex-col items-center justify-center text-xl">
-//               <p className="font-semibold">
-//                 <span className="font-bold text-yellow-500">Total Lectures:</span>{" "}
-//                 {state?.numberOfLectures}
-//               </p>
-//               <p className="font-semibold">
-//                 <span className="font-bold text-yellow-500">Instructor:</span>{" "}
-//                 {state?.createdBy}
-//               </p>
-//             </div>
-
-//             <p className="text-yellow-500">Course Description: </p>
-//             <p>{state?.description}</p>
-
-//             <div className="text-center">
-//               {role === "ADMIN" ? (
-//                 <button
-//                   onClick={() => navigate("/course/addlecture", { state: { ...state } })}
-//                   className="btn btn-outline btn-primary text-xl rounded-md font-bold px-5 py-3"
-//                 >
-//                   Add Lecture
-//                 </button>
-//               ) : (
-//                 ""
-//               )}
-//             </div>
-
-//             {role === "ADMIN" || data?.subscription?.status === "active" ? (
-//               <button
-//                 onClick={() => navigate("/course/displaylectures", { state: { ...state } })}
-//                 className="bg-yellow-500 text-xl rounded-md font-bold px-5 py-3 w-full hover:bg-yellow-600 transition-all ease-in-out"
-//               >
-//                 Watch Lectures
-//               </button>
-//             ) : (
-//               <button
-//                 onClick={() => navigate("/checkout")}
-//                 className="bg-yellow-500 text-xl rounded-md font-bold px-5 py-3 w-full hover:bg-yellow-600 transition-all ease-in-out"
-//               >
-//                 Subscribe
-//               </button>
-//             )}
-//           </div>
-//         </div>
-//       </div>
-//     </HomeLayout>
-//   );
-// }
-
-// export default CourseDescription;
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import HomeLayout from "../../../Layouts/HomeLayout/HomeLayout";
@@ -88,6 +7,8 @@ function CourseDescription() {
   const navigate = useNavigate();
 
   const { role, data } = useSelector((state) => state.auth);
+
+
 
   return (
     <HomeLayout>
@@ -157,8 +78,8 @@ function CourseDescription() {
               <div className="text-center">
                 {role === "ADMIN" ? (
                   <button
-                    onClick={() => navigate("/course/addlecture", { state: { ...state } })}
-                    className="btn btn-outline btn-primary text-xl rounded-md font-bold px-5 py-3"
+                  onClick={() =>navigate("/course/addlecture",{state:{...state}})}
+                  className="btn btn-outline btn-primary text-xl rounded-md font-bold px-5 py-3"
                   >
                     Add Lecture
                   </button>

@@ -38,12 +38,13 @@ export const deleteCourseLecture=createAsyncThunk("/course/lecture/delete",async
 })
 
 export const addCourseLecture=createAsyncThunk("/course/lecture/add",async (data)=>{
-    try {
+    
 
         const formData=new FormData()
         formData.append("lecture",data.lecture)
         formData.append("title",data.title)
         formData.append("description",data.description)
+        try {
 
         const response=axiosInstance.post(`/courses/${data.id}`,formData)
         toast.promise(response,{
