@@ -2,6 +2,8 @@ import AppError from "../utlis/appError.js"
 import jwt from 'jsonwebtoken'
 
 
+//++++++++++++++++++++isLoggedIn Method+++++++++++++++++++++++
+
 const isLoggedIn = async function(req, res, next) {
     try {
         const { token } = req.cookies;
@@ -24,6 +26,9 @@ const isLoggedIn = async function(req, res, next) {
     }
 };
 
+
+//++++++++++++++++++++authorizedRoles Method+++++++++++++++++++++++
+
 const authorizedRoles = (...roles)=> (req,res,next)=>{
 
     const currentRole=req.user.role;
@@ -35,6 +40,9 @@ const authorizedRoles = (...roles)=> (req,res,next)=>{
     }
     next();
 }
+
+
+//++++++++++++++++++++authorizedSubscriber Method+++++++++++++++++++++++
 
 const authorizedSubscriber=async (req,res,next)=>{
 

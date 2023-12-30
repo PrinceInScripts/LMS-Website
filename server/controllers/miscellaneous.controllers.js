@@ -2,6 +2,7 @@ import User from "../models/user.model.js"
 import AppError from "../utlis/appError.js"
 import sendEmail from "../utlis/sendEmail.js"
 
+//++++++++++++++++++++contactUs Method+++++++++++++++++++++++
 
 export const contactUs=async (req,res,next)=>{
        const {name,email,message}=req.body
@@ -26,6 +27,8 @@ export const contactUs=async (req,res,next)=>{
         message: 'Your request has been submitted successfully',
       });
 }
+
+//++++++++++++++++++++userStats Method+++++++++++++++++++++++
 
 export const userStats=async (req,res,next)=>{
    const allUsersCount=await User.countDocuments()

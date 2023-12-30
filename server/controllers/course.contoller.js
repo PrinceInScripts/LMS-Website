@@ -165,65 +165,61 @@ export const deleteCourse=async (req,res,next)=>{
 }
 
 
-export const addLectureToCourseById=async (req,res,next)=>{
+//++++++++++++++++++++addLectureToCourseById Method+++++++++++++++++++++++
+
+export const addLectureToCourseById = async (req, res, next) => {
+    const { title, description } = req.body;
+    const { courseId } = req.params;
+    let lectureData = {};
+  
     try {
-        const {title,description}=req.body
-
-        const {courseId}=req.params
-
-        if(!title || !description){
-            return next(
-                new AppError('All fileds are required',400)
-            )
+      if (!title || !description) {
+        throw new AppError('All fields are required', 400);
+      }
+  
+      const course = await Course.findById(courseId);
+  
+      if (!course) {
+        throw new AppError('Course with given id does not exist!', 400);
+      }
+  
+      if (req.file) {
+        const result = await cloudinary.v2.uploader.upload(req.file.path, {
+          folder: 'lms',
+          chunk_size: 200000000,
+          resource_type: 'video',
+        });
+  
+        if (result) {
+          lectureData.public_id = result.public_id;
+          lectureData.secure_url = result.secure_url;
         }
-
-        const course=await Course.findById(courseId)
-
-        if(!course){
-            return next(
-                new AppError('Course with given id does not exist!',400)
-            )
-        }
-
-        const letureData={
-            title,
-            description,
-            lecture:{}
-        }
-
-        if(req.file){
-            const result = await cloudinary.v2.uploader.upload(req.file.path,{
-                folder:'lms',
-                chunk_size:50000000,
-                resource_type:'video'
-            })
-
-            if(result){
-                letureData.lecture.public_id=result.public_id
-                letureData.lecture.secure_url=result.secure_url
-            }
-
-            fs.rm(`uploads/${req.file.filename}`);
-
-            course.lectures.push(letureData)
-            course.numbersOfLectures=course.lectures.length
-
-            await course.save();
-
-            res.status(200).json({
-                success:true,
-                message:'Lecture Added successfully',
-                course
-            })
-
-
-        }
-    } catch (e) {
-        return next(
-            new AppError(e.message,500)
-        )
+  
+        await fs.unlink(req.file.path); // Use fs.unlink for file removal
+  
+        course.lectures.push({
+          title,
+          description,
+          lecture: lectureData,
+        });
+  
+        course.numberOfLectures = course.lectures.length;
+        await course.save();
+  
+        res.status(200).json({
+          success: true,
+          message: 'Lecture Added successfully',
+          course,
+        });
+      }
+    } catch (error) {
+      // Handle errors here
+      next(new AppError(error.message, error.statusCode || 500));
     }
-}
+  };
+  
+
+//++++++++++++++++++++removeLectureFromCourse Method+++++++++++++++++++++++
 
 export const removeLectureFromCourse = async (req, res, next) => {
     const { courseId, lectureId } = req.query;

@@ -5,6 +5,8 @@ import AppError from "../utlis/appError.js"
 import crypto from 'crypto'
 
 
+//++++++++++++++++++++getRazorpayApiKey Method+++++++++++++++++++++++
+
 export const getRazorpayApiKey=async (req,res,next)=>{
      try {
         res.status(200).json({
@@ -18,6 +20,10 @@ export const getRazorpayApiKey=async (req,res,next)=>{
         )
      }
 }
+
+
+//++++++++++++++++++++buySubscription Method+++++++++++++++++++++++
+
 export const buySubscription=async (req,res,next)=>{
 
     try {
@@ -63,6 +69,10 @@ export const buySubscription=async (req,res,next)=>{
        )
     }
 }
+
+
+//++++++++++++++++++++verifySubcription Method+++++++++++++++++++++++
+
 export const verifySubcription=async (req,res,next)=>{
     try {
         const {id}=req.user
@@ -112,6 +122,10 @@ export const verifySubcription=async (req,res,next)=>{
        )
     }
 }
+
+
+//++++++++++++++++++++cancelSubcription Method+++++++++++++++++++++++
+
 export const cancelSubcription=async (req,res,next)=>{
     try {
         
@@ -150,6 +164,10 @@ export const cancelSubcription=async (req,res,next)=>{
        )
     }
 }
+
+
+//++++++++++++++++++++getAllPayments Method+++++++++++++++++++++++
+
 export const getAllPayments=async (req,res,next)=>{
     try {
         
