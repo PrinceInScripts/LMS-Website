@@ -52,7 +52,7 @@ export const buySubscription=async (req,res,next)=>{
         //update user model with subscription
 
         user.subscription.id=subscription.id;
-        user.subscription.status=subscription.status
+        user.subscription.status="active"
 
         await user.save()
 
@@ -60,6 +60,7 @@ export const buySubscription=async (req,res,next)=>{
             success:true,
             message:'Subscribed Successfully',
             subscription_id: subscription.id,
+            subscription_user:user.subscription.status
 
         })
 
@@ -86,7 +87,7 @@ export const verifySubcription=async (req,res,next)=>{
         }
 
        const {razorpay_payment_id,razorpay_signature,razorpay_subscription_id}=req.body
-
+       console.log(razorpay_payment_id,razorpay_signature,razorpay_subscription_id);
        const generatedSignature=crypto
                                 .createHmac('sha256',process.env.RAZORPAY_SECRET)
                                 .update(`${razorpay_payment_id}|${razorpay_subscription_id}`)
@@ -108,6 +109,7 @@ export const verifySubcription=async (req,res,next)=>{
         //update user record with subcription status
 
         user.subscription.status='active'
+       
 
         await user.save()
 
