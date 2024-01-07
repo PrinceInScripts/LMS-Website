@@ -1,4 +1,4 @@
-<H1 align ="center" > About Learning Management System (LMS) projec  </h1>
+<H1 align ="center" > Learning Management System (LMS) project  </h1>
 <br/>
 
   * [Configuration and Setup](#configuration-and-setup)
